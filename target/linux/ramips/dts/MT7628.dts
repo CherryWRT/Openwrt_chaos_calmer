@@ -5,19 +5,70 @@
 / {
 	compatible = "mediatek,mt7628an-eval-board", "mediatek,mt7628an-soc";
 	model = "Mediatek MT7628AN evaluation board";
+	
+        chosen {
+                bootargs = "console=ttyS0,115200";
+        };
+
 
 	memory@0 {
 		device_type = "memory";
-		reg = <0x0 0x2000000>;
+		reg = <0x0 0x10000000>;
 	};
 
 	pinctrl {
 		state_default: pinctrl0 {
 			gpio {
-				ralink,group = "i2c", "jtag";
+				ralink,group = "i2c";
 				ralink,function = "gpio";
 			};
+			p0_led {
+				ralink,group = "p0_led_an";
+				ralink,function = "gpio";
+			};
+			p1_led {
+				ralink,group = "p1_led_an";
+				ralink,function = "gpio";
+			};
+			p2_led {
+				ralink,group = "p2_led_an";
+				ralink,function = "gpio";
+			};
+			p3_led {
+				ralink,group = "p3_led_an";
+				ralink,function = "gpio";
+			};
+			p4_led {
+				ralink,group = "p4_led_an";
+				ralink,function = "gpio";
+			};
+			spis {
+				ralink,group = "spis";
+				ralink,function = "pwm_uart2";
+			};
+                        pwm1 {
+                                ralink,group = "pwm1";
+                                ralink,function = "gpio";
+                        };
+                        pwm0 {
+                                ralink,group = "pwm0";
+                                ralink,function = "gpio";
+                        };
+			uart2 {
+				ralink,group = "uart2";
+				ralink,function = "pwm";
+			};
+			refclk {
+				ralink,group = "refclk";
+				ralink,function = "gpio";
+			};
+			gpio_0 {
+				ralink,group = "gpio";
+				ralink,function = "gpio";
+			};
+
 		};
+	
 	};
 
 	palmbus@10000000 {
@@ -57,5 +108,22 @@
 				};
 			};
 		};
+                uart1@d00 {
+                        status = "okay";
+                };
+
+                uart2@e00 {
+                        status = "okay";
+                };
+			
+	
 	};
+        sdhci@10130000 {
+                status = "okay";
+                mediatek,cd-low;
+        };
+	wmac@10180000{
+                ralink,mtd-eeprom = <&factory 0>;
+        };
+	
 };
