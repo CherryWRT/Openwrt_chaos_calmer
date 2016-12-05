@@ -80,9 +80,11 @@ define KernelPackage/sound-mtk
   DEPENDS:= +kmod-sound-soc-core +kmod-regmap +kmod-i2c-ralink @(TARGET_ramips_mt7628||TARGET_ramips_mt7688||TARGET_ramips_mt7620)
   KCONFIG:= \
 	CONFIG_SND_MT76XX_SOC \
+	CONFIG_SND_MT76XX_SOC_MT7628=y \
+	CONFIG_SND_MT76XX_SOC_MT7620=n \
 	CONFIG_SND_MT76XX_I2S \
 	CONFIG_SND_MT76XX_PCM \
-	CONFIG_SND_SOC_WM8960
+	CONFIG_SND_SOC_WM8960 
   FILES:= \
 	$(LINUX_DIR)/sound/soc/mtk/ralink_gdma.ko \
 	$(LINUX_DIR)/sound/soc/mtk/snd-soc-mt76xx-i2s-ctl.ko \

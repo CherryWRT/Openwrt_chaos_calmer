@@ -13,7 +13,9 @@
 
 	memory@0 {
 		device_type = "memory";
-		reg = <0x0 0x10000000>;
+		reg = <0x0 0x10000000>; //256MB RAM
+	//	reg = <0x0 0x8000000>; //128MB RAM
+	//	reg = <0x0 0x4000000>; //64MB RAM
 	};
 
 	pinctrl {
@@ -54,10 +56,7 @@
                                 ralink,group = "pwm0";
                                 ralink,function = "gpio";
                         };
-			uart2 {
-				ralink,group = "uart2";
-				ralink,function = "pwm";
-			};
+
 			refclk {
 				ralink,group = "refclk";
 				ralink,function = "gpio";
@@ -66,12 +65,28 @@
 				ralink,group = "gpio";
 				ralink,function = "gpio";
 			};
+                        i2s {
+                                ralink,group = "i2s";
+                                ralink,function = "i2s";
+                        };
 
+
+		};
+
+	        uart2_pins: uart2 {
+        		uart2 {
+                		ralink,group = "uart2";
+                        	ralink,function = "pwm";
+                       	 };
 		};
 	
 	};
 
 	palmbus@10000000 {
+                i2c@900 {
+                        status = "okay";
+                };
+
 		spi@b00 {
 			status = "okay";
 
@@ -80,7 +95,7 @@
 				#size-cells = <1>;
 				compatible = "en25q64";
 				reg = <0 0>;
-				linux,modalias = "m25p80", "en25q64";
+				linux,modalias = "w25q64", "w25q128", "w25q256";
 				spi-max-frequency = <10000000>;
 				m25p,chunked-io = <32>;
 
@@ -104,7 +119,9 @@
 
 				partition@50000 {
 					label = "firmware";
-					reg = <0x50000 0x7b0000>;
+				//	reg = <0x50000 0x7b0000>; //8MB flash
+				//	reg = <0x50000 0xfb0000>; //16MB flash
+					reg = <0x50000 0x1fb0000>; //32MB flash
 				};
 			};
 		};
@@ -122,8 +139,78 @@
                 status = "okay";
                 mediatek,cd-low;
         };
-	wmac@10180000{
-                ralink,mtd-eeprom = <&factory 0>;
+
+        ethernet@10100000 {
+                mtd-mac-address = <&factory 0x28>;
         };
-	
+
+        gpio-leds {
+                compatible = "gpio-leds";
+                
+		system {
+                        label = "mediatek:green:system";
+                        gpios = <&gpio1 5 1>;
+                        default-state = "off";
+                };
+		
+                wifi {
+                        label = "mediatek:green:wifi";
+                        gpios = <&gpio1 7 1>;
+                        default-state = "off";
+                };
+
+                wan {
+                        label = "mediatek:green:wan";
+                        gpios = <&gpio1 11 1>;
+                        default-state = "off";
+                };
+
+		
+                lan1 {
+                        label = "mediatek:green:lan_1";
+                        gpios = <&gpio1 10 1>;
+                        default-state = "off";
+                };
+
+                lan2 {
+                        label = "mediatek:green:lan_2";
+                        gpios = <&gpio1 8 1>;
+                        default-state = "off";
+                };
+
+        };
+
+        gpio-keys-polled {
+                compatible = "gpio-keys-polled";
+                #address-cells = <1>;
+                #size-cells = <0>;
+                poll-interval = <20>;
+
+//                reset {
+//                        label = "reset";
+//                        gpios = <&gpio1 12 1>;
+//                        linux,code = <0x198>;
+//                };
+
+                button_3 {
+                        label = "button_3";
+                        gpios = <&gpio1 12 1>;
+                        linux,code = <0x103>;
+                };
+
+                button_1 {
+                        label = "button_1";
+                        gpios = <&gpio1 6 1>;
+                        linux,code = <0x101>;
+                };
+
+                button_2 {
+                        label = "button_2";
+                        gpios = <&gpio1 9 1>;
+                        linux,code = <0x102>;
+                };
+		
+
+        };	
+
 };

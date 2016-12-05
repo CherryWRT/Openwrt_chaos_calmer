@@ -168,7 +168,7 @@ CountryRegion=${countryregion:-0}
 CountryRegionABand=7
 CountryCode=${country:-US}
 BssidNum=${ssid_num:-1}
-SSID1=${ssid1:-Wrtnode}
+SSID1=${ssid1:-ZhuoTK}
 SSID2=
 SSID3=
 SSID4=
@@ -620,14 +620,6 @@ detect_ralink() {
 	mkdir -p /etc/Wireless/RT2860/ 2>/dev/null
 	ln -s /tmp/RT2860.dat /etc/Wireless/RT2860/RT2860.dat 2>/dev/null
 	}
-	
-	mach=$(cat /proc/cpuinfo | grep machine | awk '{ print $3}')
-
-	if [ "$mach"x = "WRTnode2R"x ] ;then
-		name="2R"
-	else
-		name="2P"
-	fi
 		cat <<EOF
 config wifi-device  ra${i}
 	option type     ralink
@@ -644,7 +636,7 @@ config wifi-iface
 	option device   ra${i}
 	option network	lan
 	option mode     ap
-	option ssid     WRTnode${name}_${i#0}$(cat /sys/class/net/eth0/address|awk -F ":" '{print $5""$6 }'| tr a-z A-Z)
+	option ssid     ZhuoTK_${i#0}$(cat /sys/class/net/eth0/address|awk -F ":" '{print $5""$6 }'| tr a-z A-Z)
 	option encryption psk2
 	option key 12345678
 	option ApCliEnable '1'
