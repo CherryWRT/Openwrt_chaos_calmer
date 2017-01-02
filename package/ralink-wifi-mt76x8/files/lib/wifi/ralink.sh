@@ -624,26 +624,22 @@ detect_ralink() {
 config wifi-device  ra${i}
 	option type     ralink
 	option mode 	9
-	option channel  auto
-	option txpower 100
+	option channel  8
+	option txpower  17
 	option ht 	20
 	option country US
 	
-# REMOVE THIS LINE TO ENABLE WIFI:
-	option disabled 0	
-	
 config wifi-iface
 	option device   ra${i}
-	option network	lan
-	option mode     ap
+	option network	'lan'
+	option mode     'ap'
 	option ssid     ZhuoTK_${i#0}$(cat /sys/class/net/eth0/address|awk -F ":" '{print $5""$6 }'| tr a-z A-Z)
-	option encryption psk2
-	option key 12345678
-	option ApCliEnable '1'
-	option ApCliSsid 'aAP'
-	option ApCliAuthMode 'WPA2PSK'
-	option ApCliEncrypType 'AES'
-	option ApCliPassWord '87654321'
+	option encryption 'none'
+        option ApCliEnable '1'
+        option ApCliSsid 'aAP'
+        option ApCliAuthMode 'WPA2PSK'
+        option ApCliEncrypType 'AES'
+        option ApCliPassWord '87654321'
 	
 EOF
 

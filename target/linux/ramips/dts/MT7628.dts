@@ -13,9 +13,9 @@
 
 	memory@0 {
 		device_type = "memory";
-		reg = <0x0 0x10000000>; //256MB RAM
+	//	reg = <0x0 0x10000000>; //256MB RAM
 	//	reg = <0x0 0x8000000>; //128MB RAM
-	//	reg = <0x0 0x4000000>; //64MB RAM
+		reg = <0x0 0x4000000>; //64MB RAM
 	};
 
 	pinctrl {
@@ -119,9 +119,9 @@
 
 				partition@50000 {
 					label = "firmware";
-				//	reg = <0x50000 0x7b0000>; //8MB flash
+					reg = <0x50000 0x7b0000>; //8MB flash
 				//	reg = <0x50000 0xfb0000>; //16MB flash
-					reg = <0x50000 0x1fb0000>; //32MB flash
+				//	reg = <0x50000 0x1fb0000>; //32MB flash
 				};
 			};
 		};
@@ -194,19 +194,19 @@
 
                 button_3 {
                         label = "button_3";
-                        gpios = <&gpio1 12 1>;
+                        gpios = <&gpio1 12 0>;
                         linux,code = <0x103>;
                 };
 
                 button_1 {
                         label = "button_1";
-                        gpios = <&gpio1 6 1>;
+                        gpios = <&gpio1 6 0>;
                         linux,code = <0x101>;
                 };
 
                 button_2 {
                         label = "button_2";
-                        gpios = <&gpio1 9 1>;
+                        gpios = <&gpio1 9 0>;
                         linux,code = <0x102>;
                 };
 		

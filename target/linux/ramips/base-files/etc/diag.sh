@@ -117,6 +117,9 @@ get_status_led() {
 	mr-102n)
 		status_led="mr-102n:amber:status"
 		;;
+	mt7628)
+		status_led="mediatek:green:system"
+		;;
 	nbg-419n)
 		status_led="nbg-419n:green:power"
 		;;
