@@ -14,15 +14,15 @@
 	memory@0 {
 		device_type = "memory";
 	//	reg = <0x0 0x10000000>; //256MB RAM
-	//	reg = <0x0 0x8000000>; //128MB RAM
-		reg = <0x0 0x4000000>; //64MB RAM
+		reg = <0x0 0x8000000>; //128MB RAM
+	//	reg = <0x0 0x4000000>; //64MB RAM
 	};
 
 	pinctrl {
 		state_default: pinctrl0 {
 			gpio {
-				ralink,group = "i2c";
-				ralink,function = "gpio";
+		//		ralink,group = "i2c";
+		//		ralink,function = "gpio";
 			};
 			p0_led {
 				ralink,group = "p0_led_an";
@@ -63,7 +63,7 @@
 			};
 			gpio_0 {
 				ralink,group = "gpio";
-				ralink,function = "gpio";
+				ralink,function = "refclk_fc";
 			};
                         i2s {
                                 ralink,group = "i2s";
@@ -119,8 +119,8 @@
 
 				partition@50000 {
 					label = "firmware";
-					reg = <0x50000 0x7b0000>; //8MB flash
-				//	reg = <0x50000 0xfb0000>; //16MB flash
+				//	reg = <0x50000 0x7b0000>; //8MB flash
+					reg = <0x50000 0xfb0000>; //16MB flash
 				//	reg = <0x50000 0x1fb0000>; //32MB flash
 				};
 			};
